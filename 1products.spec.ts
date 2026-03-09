@@ -8,22 +8,22 @@ test.describe('Products API', () => {
     const response = await request.get('https://automationexercise.com/api/productsList');
     //console.log(await response.json()); 
 
-    // Validate HTTP status
+    // Validating HTTP status
     expect(response.status()).toBe(200);
 
-    // Convert response to JSON
+    // Converting response to JSON
     const responseBody = await response.json();
 
-    // Validate API response code
+    // Validating API response code
     expect(responseBody.responseCode).toBe(200);
 
-    // Validate products array exists
+    // Validating products array exists
     expect(responseBody.products).toBeDefined();
 
-    // Validate products list is not empty
+    // Validating products list is not empty
     expect(responseBody.products.length).toBeGreaterThan(0);
 
-    // Optional validation: check product fields
+    
     const firstProduct = responseBody.products[0];
 
     expect(firstProduct).toHaveProperty('id');
@@ -46,25 +46,25 @@ test('TC-02: Verify category object contains usertype and category', async ({ re
 
   console.log(await response.json())
 
-  // Validate status code
+  // Validating status code
   expect(response.status()).toBe(200);
 
   // Parse response
   const responseBody = await response.json();
 
-  // Get first product
+  // Getting first product
   const firstProduct = responseBody.products[0];
 
-  // Validate category object exists
+  // Validating category object exists
   expect(firstProduct.category).toBeDefined();
 
-  // Validate category.category field
+  // Validating category.category field
   expect(firstProduct.category).toHaveProperty('category');
 
-  // Validate category.usertype exists
+  // Validating category.usertype exists
   expect(firstProduct.category).toHaveProperty('usertype');
 
-  // Validate nested usertype value
+  // Validating nested usertype value
   expect(firstProduct.category.usertype).toHaveProperty('usertype');
 
 });
@@ -81,25 +81,25 @@ test('TC-03: Verify product id values are unique and no duplicates exist', async
   // Parse response body
   const responseBody = await response.json();
 
-  // Extract all product IDs
+  // Extracting all product IDs
   const productIds = responseBody.products.map((product: any) => product.id);
 
-  // Convert array to Set (removes duplicates)
+  // Converting array to Set (removes duplicates)
   const uniqueIds = new Set(productIds);
 
-  // Validate no duplicate IDs exist
+  // Validating no duplicate IDs exist
   expect(uniqueIds.size).toBe(productIds.length);
 
 });
 
 test('TC-04: Verify 404 error is displayed when accessing an invalid URL', async ({ request }) => {
 
-  // Send request to invalid endpoint
+  // Sending request to invalid endpoint
   const response = await request.get(
     'https://automationexercise.com/api/products'
   );
 
-  // Validate HTTP status code is 404
+  // Validating HTTP status code is 404
   expect(response.status()).toBe(404);
 
 });
