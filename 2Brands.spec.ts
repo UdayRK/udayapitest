@@ -11,22 +11,22 @@ test('TC-01:Verify user can fetch all brand details using GET method', async ({ 
 
   console.log(await response.json());
 
-  // Validate HTTP status code
+  // Validating HTTP status code
   expect(response.status()).toBe(200);
 
-  // Convert response to JSON
+  // Converting response to JSON
   const responseBody = await response.json();
 
-  // Validate API response code
+  // Validating API response code
   expect(responseBody.responseCode).toBe(200);
 
-  // Validate brands array exists
+  // Validating brands array exists
   expect(responseBody.brands).toBeDefined();
 
-  // Validate brands list is not empty
+  // Validating brands list is not empty
   expect(responseBody.brands.length).toBeGreaterThan(0);
 
-  // Validate structure of first brand
+  // Validating structure of first brand
   const firstBrand = responseBody.brands[0];
 
   expect(firstBrand).toHaveProperty('id');
@@ -36,24 +36,24 @@ test('TC-01:Verify user can fetch all brand details using GET method', async ({ 
 
 test('TC-02:Verify brand id values are unique and no duplicate ids exist', async ({ request }) => {
 
-  // Send GET request to fetch brands
+  // Sending GET request to fetch brands
   const response = await request.get(
     'https://automationexercise.com/api/brandsList'
   );
 
-  // Validate HTTP status code
+  // Validating HTTP status code
   expect(response.status()).toBe(200);
 
   // Parse response body
   const responseBody = await response.json();
 
-  // Extract all brand IDs
+  // Extracting all brand IDs
   const brandIds = responseBody.brands.map((brand: any) => brand.id);
 
-  // Convert array to Set to remove duplicates
+  // Converting array to Set to remove duplicates
   const uniqueIds = new Set(brandIds);
 
-  // Validate there are no duplicate IDs
+  // Validating there are no duplicate IDs
   expect(uniqueIds.size).toBe(brandIds.length);
 
 });
@@ -64,7 +64,7 @@ test('TC-03: Verify 404 error is displayed when accessing an invalid URL', async
     'https://automationexercise.com/api/brands'
   );
 
-  // Validate HTTP status code is 404
+  // Validating HTTP status code is 404
   expect(response.status()).toBe(404);
 
 });
